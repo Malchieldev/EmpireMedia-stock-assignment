@@ -1,43 +1,37 @@
 import useSwr from "swr";
-
 import fetcher, { defaultQueryParams } from "@/utils/fetcher";
+import { format, endOfDay, startOfDay, parse } from "date-fns";
 
 import Head from "next/head";
-import Overview from "@/components/Overview";
-import LoadingSpinner from "@/components/UI/LoadingSpinner";
+import History from "@/components/History";
 
 const companyName = process.env.NEXT_PUBLIC_COMPANY_NAME || "";
 const chartUrl = process.env.NEXT_PUBLIC_CHART_API || "";
 
-import type { TickerData } from "@/types/types";
+import type { TickerData, ChartData } from "@/types/types";
 
-type HomeProps = {
+type HistoryPageProps = {
+  initialChartData: ChartData[];
   initialTickerData: TickerData;
   queryParams: { [key: string]: any };
 };
 
-export default function Home(props: HomeProps) {
-  const { queryParams } = props;
+export default function HistoryPage(props: HistoryPageProps) {
+  const { initialChartData, queryParams } = props;
 
-  const { data: chartData } = useSwr([chartUrl, queryParams], fetcher);
-
-  if (!chartData) {
-    return (
-      <div style={{ display: "flex", height: "400px", alignItems: "center" }}>
-        <LoadingSpinner pixelSize={150} />
-      </div>
-    );
-  }
+  const { data: chartData } = useSwr([chartUrl, queryParams], fetcher, {
+    fallbackData: initialChartData,
+  });
 
   return (
     <>
       <Head>
-        <title>{`${companyName} - Stock`}</title>
+        <title>{`${companyName} - History`}</title>
         <meta name="description" content="Stock data" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Overview chartData={chartData} />
+      <History chartData={chartData} />
     </>
   );
 }
@@ -45,6 +39,7 @@ export default function Home(props: HomeProps) {
 export const getStaticProps = async () => {
   let initialTickerData = null;
 
+  //ticker data:
   const queryParams = {
     ...defaultQueryParams,
     Period: 1,
@@ -64,9 +59,12 @@ export const getStaticProps = async () => {
     initialTickerData = { last: close, change, percentChange, lastUpdate };
   }
 
+  const initialChartData = await fetcher([chartUrl, defaultQueryParams]);
+
   return {
     props: {
       initialTickerData,
+      initialChartData,
     },
   };
 };

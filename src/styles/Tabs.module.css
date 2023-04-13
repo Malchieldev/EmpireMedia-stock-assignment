@@ -1,0 +1,33 @@
+.tab {
+  position: relative;
+  display: flex;
+  font-size: 16px;
+  color: rgb(178, 178, 178);
+  font-weight: bold;
+}
+
+.tab li {
+  padding: 1rem;
+  position: relative;
+}
+
+.active {
+  color: var(--active-color);
+}
+
+.tab:before {
+  border-top-color: rgb(178, 178, 178);
+}
+
+.active:before {
+  border-color: var(--active-color);
+}
+.tab:before,
+.active:before {
+  content: "";
+  border-top: 2px solid;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}

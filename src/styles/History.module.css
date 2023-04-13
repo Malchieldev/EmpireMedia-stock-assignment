@@ -1,0 +1,52 @@
+.history table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.history th {
+  background-color: rgb(247, 247, 247);
+}
+
+.history th div {
+  display: flex;
+  align-items: center;
+}
+
+.history td,
+.history th {
+  border: 1px solid rgb(221, 221, 221);
+  text-align: left;
+  padding: 8px;
+}
+
+.sort-group {
+  margin: 0 5px;
+  flex-direction: column;
+}
+
+.history button {
+  cursor: pointer;
+}
+
+.arrow {
+  margin: 2px 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+.up {
+  border-bottom: 5px solid rgb(153, 153, 153);
+}
+
+.down {
+  border-top: 5px solid rgb(153, 153, 153);
+}
+
+.up-active {
+  border-bottom-color: rgb(33, 33, 33);
+}
+
+.down-active {
+  border-top-color: rgb(33, 33, 33);
+}
