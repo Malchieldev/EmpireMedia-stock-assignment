@@ -1,5 +1,7 @@
 # [Apple] Stock app
 
+https://empire-media-stock-assignment.vercel.app/
+
 ### Built with NextJS, ReCharts.
 
 ### Functionalities
