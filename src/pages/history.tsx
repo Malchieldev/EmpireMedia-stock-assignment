@@ -21,6 +21,7 @@ export default function HistoryPage(props: HistoryPageProps) {
 
   const { data: chartData } = useSwr([chartUrl, queryParams], fetcher, {
     fallbackData: initialChartData,
+    revalidateOnFocus: false,
   });
 
   return (

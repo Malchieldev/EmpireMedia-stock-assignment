@@ -19,7 +19,9 @@ type HomeProps = {
 export default function Home(props: HomeProps) {
   const { queryParams } = props;
 
-  const { data: chartData } = useSwr([chartUrl, queryParams], fetcher);
+  const { data: chartData } = useSwr([chartUrl, queryParams], fetcher, {
+    revalidateOnFocus: false,
+  });
 
   if (!chartData) {
     return (
