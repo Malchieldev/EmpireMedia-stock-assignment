@@ -15,11 +15,12 @@ export default function Tabs() {
       <ul className={styled.tab}>
         {navLinks.map((tab, i) => {
           return (
-            <Link key={`tab-${i}`} href={tab.path}>
-              <li className={tab.path === path ? `${styled.active}` : ""}>
-                {tab.name}
-              </li>
-            </Link>
+            <li
+              key={`tab-${i}`}
+              className={tab.path === path ? `${styled.active}` : ""}
+            >
+              <Link href={tab.path}>{tab.name}</Link>
+            </li>
           );
         })}
       </ul>
