@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       ...prev,
       Period: 1,
       Precision: "Minutes",
-      StartTime: format(startOfDay(new Date()), "MM/dd/yyyy HH:mm"),
+      StartTime: format(startOfDay(new Date()), "MM/dd/yyyy"),
       EndTime: format(endOfDay(new Date()), "MM/dd/yyyy HH:mm"),
     }));
   };
@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
       ...prev,
       Period: 5,
       Precision: "Minutes",
-      StartTime: format(startOfDay(new Date()), "MM/dd/yyyy HH:mm"),
+      StartTime: format(startOfDay(new Date()), "MM/dd/yyyy"),
       EndTime: format(endOfDay(new Date()), "MM/dd/yyyy HH:mm"),
     }));
   };
