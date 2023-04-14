@@ -32,7 +32,11 @@ export default function History(props: HistoryProps) {
 
   const sortedData = _.orderBy(
     chartData.map((el) => {
-      return { ...el, change: 100 - (el.open / el.close) * 100 };
+      return {
+        ...el,
+        date: new Date(el.date),
+        change: 100 - (el.open / el.close) * 100,
+      };
     }),
     _.camelCase(sortParams.field),
     sortParams.order

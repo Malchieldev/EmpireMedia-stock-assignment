@@ -6,7 +6,7 @@ type TickerData = {
 };
 
 type ChartData = {
-  date: string;
+  date: string | Date;
   high: number;
   low: number;
   open: number;

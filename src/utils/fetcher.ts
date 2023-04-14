@@ -1,6 +1,5 @@
 import { Fetcher } from "swr";
 import { parse } from "date-fns";
-import axios from "axios";
 import { format, startOfDay, endOfDay } from "date-fns";
 
 import { ChartData } from "@/types/types";
@@ -25,11 +24,10 @@ const fetcher: Fetcher<ChartData[], [string, { [key: string]: any }]> = async (
 ) => {
   const [url, queryParams] = params;
 
-  const response = await axios.get(url, {
-    params: queryParams,
-  });
-
-  const data = response.data.map((el: { [key: string]: any }) => {
+  const urlParams = new URLSearchParams(queryParams);
+  const response = await fetch(`${url}?${urlParams}`);
+  const dataRaw = await response.json();
+  const data = dataRaw.map((el: { [key: string]: any }) => {
     const date = parse(el.Date, "yyyy/MM/dd HH:mm:ss", new Date()).toString();
 
     return {
