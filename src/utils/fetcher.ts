@@ -28,11 +28,14 @@ const fetcher: Fetcher<ChartData[], [string, { [key: string]: any }]> = async (
   const response = await fetch(`${url}?${urlParams}`);
   const dataRaw = await response.json();
   const data = dataRaw.map((el: { [key: string]: any }) => {
-    const date = parse(el.Date, "yyyy/MM/dd HH:mm:ss", new Date());
-    const timeZoneOffSet = new Date(date).getTimezoneOffset() * 60000;
+    const date = parse(
+      el.Date,
+      "yyyy/MM/dd HH:mm:ss",
+      new Date()
+    ).toISOString();
 
     return {
-      date: new Date(date.getTime() - timeZoneOffSet).toISOString(),
+      date,
       high: el.High,
       low: el.Low,
       open: el.Open,
