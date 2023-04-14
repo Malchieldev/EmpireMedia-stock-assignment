@@ -28,7 +28,11 @@ const fetcher: Fetcher<ChartData[], [string, { [key: string]: any }]> = async (
   const response = await fetch(`${url}?${urlParams}`);
   const dataRaw = await response.json();
   const data = dataRaw.map((el: { [key: string]: any }) => {
-    const date = parse(el.Date, "yyyy/MM/dd HH:mm:ss", new Date()).toString();
+    const date = parse(
+      el.Date,
+      "yyyy/MM/dd HH:mm:ss",
+      new Date()
+    ).toISOString();
 
     return {
       date,
