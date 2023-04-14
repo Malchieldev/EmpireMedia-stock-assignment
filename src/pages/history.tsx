@@ -67,5 +67,6 @@ export const getStaticProps = async () => {
       initialTickerData,
       initialChartData,
     },
+    revalidate: 1,
   };
 };

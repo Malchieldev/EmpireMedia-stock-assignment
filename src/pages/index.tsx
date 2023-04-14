@@ -69,6 +69,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       initialTickerData,
+      revalidate: 1,
     },
   };
 };
