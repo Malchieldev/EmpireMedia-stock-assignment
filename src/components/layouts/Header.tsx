@@ -56,7 +56,7 @@ export default function Header(props: HeaderProps) {
   const dateRaw = new Date(lastUpdate);
   const timeZoneOffSet = dateRaw.getTimezoneOffset() * 60000;
 
-  const date = format(dateRaw.getTime() - timeZoneOffSet, "MMM dd, yyyy HH:mm");
+  const date = format(dateRaw.getTime() + timeZoneOffSet, "MMM dd, yyyy HH:mm");
 
   return (
     <header className={styled.hdr}>
