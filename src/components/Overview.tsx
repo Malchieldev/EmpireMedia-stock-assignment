@@ -20,17 +20,26 @@ type OverviewProps = {
 export default function Overview(props: OverviewProps) {
   const { chartData } = props;
 
-  let dateFormat: string;
+  const data = chartData.map((el) => {
+    return {
+      ...el,
+      date: new Date(el.date),
+    };
+  });
 
-  const minDate = _.minBy(chartData, "date");
-  const maxDate = _.maxBy(chartData, "date");
+  const lastClose = _.last(data)?.close;
 
-  const lastClose = _.last(chartData)?.close;
-  if (minDate && maxDate) {
-    dateFormat =
-      differenceInDays(new Date(minDate.date), new Date(maxDate.date)) > 1
-        ? "MMM, yy"
-        : "HH:mm";
+  const minDate = _.minBy(data, "date");
+  const maxDate = _.maxBy(data, "date");
+
+  let dateFormat = "HH:mm";
+
+  if (
+    minDate &&
+    maxDate &&
+    differenceInDays(new Date(maxDate.date), new Date(minDate.date)) > 1
+  ) {
+    dateFormat = "MMM, yy";
   }
 
   return (
@@ -41,7 +50,7 @@ export default function Overview(props: OverviewProps) {
         height="100%"
         minHeight={400}
       >
-        <AreaChart data={chartData}>
+        <AreaChart data={data}>
           <ReferenceLine
             x={50}
             y={lastClose}
